@@ -1,0 +1,607 @@
+body {
+	margin:0;
+	padding:0;
+	border:0;			/* This removes the border around the viewport in old versions of IE */
+	width:100%;
+	background:#ffffff;
+}
+
+a, a:visited
+{
+	text-decoration: none;
+	color: #000099;
+}
+.jardir td
+{
+	border-bottom: solid 1px black;
+}
+.jardir a
+{
+	color: blue;
+}
+.jardir a:visited
+{
+	color: cyan;
+}
+
+tr.headnav
+{
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 0.9em;
+}
+
+.svaedia
+{
+	background-color: #9933CC;
+	color: white;
+}
+
+.svaedih
+{
+	background-color: #DBDB57;
+}
+
+.svaedin
+{
+	background-color: #CB4D4D;
+}
+
+.svaedis
+{
+	background-color: #4D77CB;
+	color: white;
+}
+
+.svaediv
+{
+	background-color: #34B27D;
+	text-decoration: none;
+}
+
+td.kort0
+{
+	background-color: red;
+	color: white;
+	text-align: center;
+}
+
+td.kort1
+{
+	background-color: green;
+	color: white;
+	text-align: center;
+}
+td.kort2
+{
+	background-color: #CCCCCC;
+	color: black;
+	text-align: center;
+}
+tr.jardstat
+{
+	font-family: monospace;
+}
+
+code
+{
+	background-color: #FFFFCC;
+	width: 300px;
+}
+
+.timestamp
+{
+	font-size: small;
+}
+
+button {
+	border-radius:1px;
+	background:#54af29;
+	border-color:#2C7505;
+	color:#fff;
+	padding:1px;
+}
+button.done {
+	background:#2C7505;
+}
+button:hover {
+	background: #2C7505;
+}
+.hidden
+{
+	display: 'none';
+}
+#header
+{
+	background-color: #993333;
+	background-image: url('img/header.gif');
+	color: #FFFFFF;
+	clear:both;
+	padding-left: 10px;
+	padding-top: 10px;
+}
+#headtitle
+{
+	font-size: 20pt;
+	color: #FFFFFF;
+	padding-bottom: 5px;
+}
+#navigation1
+{
+	padding-left: 10px;
+	background-color: grey;
+	color: #FFFFFF;
+}
+#navigation1 a, #navigation1 a:visited
+{
+	color: white;
+	text-decoration: none;
+}
+a:hover
+{
+	text-decoration: underline;
+}
+#nav1 a {
+    padding: 6px;
+    /*border: 5px solid green;*/
+    text-decoration: none;
+    color: white;
+    background-color: #a53300;
+}
+#nav1 a:hover {
+    background-color: #00e200;
+    text-decoration: inherit;
+}
+#jardir th
+{
+    border: 1px solid grey;
+}
+
+td.good {
+    text-align: center;
+    background-color: rgb(0,158,115);
+}
+
+td.partial {
+    text-align: center;
+    background-color: rgb(230,159,0);
+}
+
+td.bad {
+    text-align: center;
+    background-color: rgb(213,94,0);
+}
+
+td.unknown {
+    text-align: center;
+    background-color: rgb(125,125,125);
+}
+.setlist {
+    z-index: 1;
+}
+.setlist th {
+    text-align: center;
+    background-color: rgb(0,0,0);
+    color: white;
+}
+.setlist tr[class=edgerow] th {
+    background-color: #FFFFFF;
+    color: black;
+    font-size: 0.7em;
+}
+.setlist th[class=mini] {
+    font-size: 0.7em;
+    font-weight: normal;
+}
+
+.dropdown-min {
+    width:34px; height:42px; overflow:hidden;
+}
+.dropdown-3 {
+    border: 1px solid black;
+    width:240px; height:170px; /* overflow-y:scroll;*/    
+}
+.dropdown-4 {
+    border: 1px solid black;
+    width:240px; height:212px; /* overflow-y:scroll;*/    
+}
+
+.image-dropdown {
+    /*style the "box" in its minimzed state*/
+    /*width:34px; height:42px; overflow:hidden;*/
+    /*animate collapsing the dropdown from open to closed state (v. fast)*/
+    -moz-transition: height 0.1s; 
+    -webkit-transition: height 0.1s; 
+    -ms-transition: height 0.1s;  
+    -o-transition: height 0.1s;  
+    transition: height 0.1s;
+    z-index: 2;
+}
+div.image-dropdown {
+  position: absolute;
+  background-color: white;
+  top:0px;left:0px;
+  /*border: 1px solid grey;*/
+}
+/*.image-dropdown:hover {
+    border:1px solid black; 
+    width:240px; height:170px; overflow-y:scroll;
+    -moz-transition: height 0.5s; 
+    -webkit-transition: height 0.5s; 
+    -ms-transition: height 0.5s;  
+    -o-transition: height 0.5s;  
+    transition: height 0.5s;
+    z-index: 3;
+}*/
+.image-dropdown input {
+    /*hide the nasty default radio buttons. like, completely!*/
+    position:absolute;top:0;left:0; opacity:0;
+}
+
+.image-dropdown span {
+    display:none;
+}
+.image-dropdown label {
+    /*style the labels to look like dropdown options, kinda*/
+    display:none; margin:2px; 
+    height:39px; opacity:0.2; 
+    padding-left: 40px;
+    font-family: sans-serif;
+    font-size: 0.9em;
+}
+      
+.image-dropdown label[class=building0], .image-dropdown label[class=byggingar0] {
+    background:url("img/vermillion/buildings.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=buildings0] {
+    background:url("img/vermillion/buildings.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=buildings50] {
+    background:url("img/orange/buildings.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=building1], .image-dropdown label[class=byggingar1] {
+    background: url("img/blu-green/buildings.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=buildings100] {
+    background: url("img/blu-green/buildings.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=building2], .image-dropdown label[class=byggingar2] {
+    background: url("img/grey/buildings.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=buildingsnull] {
+    background: url("img/grey/buildings.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=farm0], .image-dropdown label[class=kortlagt0] {
+    background:url("img/vermillion/farm.png");
+    background-repeat: no-repeat;
+    /*background-color: rgb(213,94,0);*/
+}
+.image-dropdown label[class=farm1], .image-dropdown label[class=kortlagt1] {
+    background: url("img/blu-green/farm.png");
+    background-repeat: no-repeat;
+    /*background-color: rgb(0,158,115);*/
+}
+.image-dropdown label[class=farm2], .image-dropdown label[class=kortlagt2] {
+    background: url("img/grey/farm.png");
+    background-repeat: no-repeat;
+    /*background-color: rgb(125,125,125);*/
+}
+.image-dropdown label[class=highway0], .image-dropdown label[class=veglagt0] {
+    background:url("img/vermillion/highway.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=highway1], .image-dropdown label[class=veglagt1] {
+    background: url("img/blu-green/highway.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=highway2], .image-dropdown label[class=veglagt2] {
+    background: url("img/grey/highway.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=network0] {
+    background:url("img/vermillion/highway.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=network50] {
+    background:url("img/orange/highway.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=network100] {
+    background: url("img/blu-green/highway.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=networknull] {
+    background: url("img/grey/highway.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=imagery0], .image-dropdown label[class=loftmynd0] {
+    background:url("img/vermillion/cloudy.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=imagery1], .image-dropdown label[class=loftmynd1] {
+    background: url("img/blu-green/sunny.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=imagery50] {
+    background: url("img/orange/cloudysunny.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=imagery100] {
+    background: url("img/blu-green/sunny.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=imagery2], .image-dropdown label[class=loftmynd2] {
+    background: url("img/grey/cloudysunny.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=imagerynull] {
+    background: url("img/grey/cloudysunny.png");
+    background-repeat: no-repeat;
+}
+
+.image-dropdown label[class=streetsnull] {
+    background: url("img/grey/streets.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=streets0] {
+    background: url("img/vermillion/streets.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=streets50] {
+    background: url("img/orange/streets.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=streets100] {
+    background: url("img/blu-green/streets.png");
+    background-repeat: no-repeat;
+}
+
+.image-dropdown label[class=addressesnull] {
+    background: url("img/grey/addresses.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=addresses0] {
+    background: url("img/vermillion/addresses.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=addresses50] {
+    background: url("img/orange/addresses.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=addresses100] {
+    background: url("img/blu-green/addresses.png");
+    background-repeat: no-repeat;
+}
+
+.image-dropdown label[class=amenitiesnull] {
+    background: url("img/grey/amenities.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=amenities0] {
+    background: url("img/vermillion/amenities.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=amenities50] {
+    background: url("img/orange/amenities.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=amenities100] {
+    background: url("img/blu-green/amenities.png");
+    background-repeat: no-repeat;
+}
+
+.image-dropdown label[class=pathsnull] {
+    background: url("img/grey/paths.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=paths0] {
+    background: url("img/vermillion/paths.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=paths50] {
+    background: url("img/orange/paths.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=paths100] {
+    background: url("img/blu-green/paths.png");
+    background-repeat: no-repeat;
+}
+
+.image-dropdown label[class=mapillarynull] {
+    background: url("img/grey/photo.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=mapillary0] {
+    background: url("img/vermillion/photo.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=mapillary50] {
+    background: url("img/orange/photo.png");
+    background-repeat: no-repeat;
+}
+.image-dropdown label[class=mapillary100] {
+    background: url("img/blu-green/photo.png");
+    background-repeat: no-repeat;
+}
+
+.image-dropdown label[class=farmtitle], .image-dropdown label[class=kortlagttitle] {
+    background: url("img/black/farm.png");
+    background-repeat: no-repeat;
+    background-color: black;
+    color: beige;
+    opacity: 1;
+    text-align: center;
+}
+
+.image-dropdown label[class=highwaytitle], .image-dropdown label[class=veglagttitle] {
+    background: url("img/black/highway.png");
+    background-repeat: no-repeat;
+    background-color: black;
+    color: beige;
+    opacity: 1;
+    text-align: center;
+}
+
+.image-dropdown label[class=networktitle] {
+    background: url("img/black/highway.png");
+    background-repeat: no-repeat;
+    background-color: black;
+    color: beige;
+    opacity: 1;
+    text-align: center;
+}
+label[class=closer] {
+    color: white;
+    position: absolute;
+    top: 2px;
+    right: 10px;
+    z-index: inherit;
+    opacity: 1;
+}
+.image-dropdown label[class=buildingstitle] {
+    background: url("img/black/buildings.png");
+    background-repeat: no-repeat;
+    background-color: black;
+    color: beige;
+    opacity: 1;
+    text-align: center;
+}
+.image-dropdown label[class=buildingtitle], .image-dropdown label[class=byggingartitle] {
+    background: url("img/black/buildings.png");
+    background-repeat: no-repeat;
+    background-color: black;
+    color: beige;
+    opacity: 1;
+    text-align: center;
+}
+.image-dropdown label[class=imagerytitle], .image-dropdown label[class=loftmyndtitle] {
+    background: url("img/black/cloudysunny.png");
+    background-repeat: no-repeat;
+    background-color: black;
+    color: beige;
+    opacity: 1;
+    text-align: center;
+}
+.image-dropdown label[class=streetstitle] {
+    background: url("img/black/streets.png");
+    background-repeat: no-repeat;
+    background-color: black;
+    color: beige;
+    opacity: 1;
+    text-align: center;
+}
+.image-dropdown label[class=addressestitle] {
+    background: url("img/black/addresses.png");
+    background-repeat: no-repeat;
+    background-color: black;
+    color: beige;
+    opacity: 1;
+    text-align: center;
+}
+.image-dropdown label[class=amenitiestitle] {
+    background: url("img/black/amenities.png");
+    background-repeat: no-repeat;
+    background-color: black;
+    color: beige;
+    opacity: 1;
+    text-align: center;
+}
+.image-dropdown label[class=pathstitle] {
+    background: url("img/black/paths.png");
+    background-repeat: no-repeat;
+    background-color: black;
+    color: beige;
+    opacity: 1;
+    text-align: center;
+}
+.image-dropdown label[class=mapillarytitle] {
+    background: url("img/black/photo.png");
+    background-repeat: no-repeat;
+    background-color: black;
+    color: beige;
+    opacity: 1;
+    text-align: center;
+}
+
+div.fixer { position: relative; 
+          height: 42px;
+}
+.image-dropdown:hover {
+    
+}
+.image-dropdown:hover label{
+    /*this is how labels render in the "expanded" state. we want to see only the selected radio button in the collapsed menu, and all of them when expanded*/
+  display:block;
+}
+.image-dropdown:hover span{
+    /*this is how labels render in the "expanded" state. we want to see only the selected radio button in the collapsed menu, and all of them when expanded*/
+    /* display:inherit;*/
+    /*display: inline-block;*/
+    position: relative;
+    display: table-cell; 
+    vertical-align: middle;
+    height: 37px;
+}
+.image-dropdown label:hover {
+    opacity:1;
+}
+.image-dropdown input:checked + label {
+    /*tricky! labels immediately following a checked radio button (with our markup they are semantically related) should be fully opaque regardless of hover, and they should always be visible (i.e. even in the collapsed menu*/
+    opacity:1 !important; display:block;
+}
+th select {
+    color: white;
+    background-color: black;
+    font-size: small;
+}
+.placename 
+{
+    font-weight: normal;
+}
+.subregionname, .placetype
+{
+    font-size: small;
+    color: #999999;
+}
+tr:hover
+      {
+          background-color: beige;
+      }
+td
+      {
+          height: 42px;
+      }
+#searcher
+{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.scorecard {
+    border: 1px solid black;
+}
+.scorecard th {
+    font-size: large;
+    background-color: #000000;
+    color: white;
+}
+.scorecard .scoresection {
+    background-color: #aaa;
+    color: black;
+    text-align: center;
+}            
+.scorecard .leftborder {
+    border-left: 1px solid #aaa;
+}
+.scorecard td {
+    border-top: 1px solid #aaa;
+
+}
