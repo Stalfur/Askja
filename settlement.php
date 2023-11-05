@@ -169,8 +169,8 @@ $zindex = 30;
 <script>
 var map = L.map('map').setView([<?= $stlm["lat"]; ?>, <?= $stlm["lon"]; ?>], <?= $zoom; ?>);
 		
-	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, map data is <a href="http://opendatacommons.org/licenses/odbl/">ODbL</a>, map tiles are <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors, map data is <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a>, map tiles are <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     maxZoom: 18
 	}).addTo(map);
 </script>
