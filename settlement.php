@@ -5,6 +5,7 @@
 	
 	$settlements = new settlements();
 	$settlements->setUser($_SESSION["osm_user"]);
+        $settlements->setSQL($sql);
         $settlements->setPDO($dbh);
 	$stlm = $settlements->getOne($_GET["ids"]);
         
@@ -12,7 +13,7 @@
         if ($pagetitle == "") { $pagetitle = "[no name]"; }
         $hasmap = "yes";
         $hasbing = "yes";
-        //zoom 15 nice for hamlet and village, 15 for town og 14 for city?
+        //zoom 16 er fínt fyrir hamlet og village, 15 fyrir town og 14 fyrir city?
         $zoom = 16;
         if ($stlm["place"] == "city") { $zoom = 14; }
         if ($stlm["place"] == "town") { $zoom = 15; }
@@ -25,7 +26,9 @@
         if ($stlm["id_country"] == 216)
         {
             $closestName = $settlements->closestSettlementsLesotho($_GET["ids"]);
-        }       
+        }
+        //$activity = $settlements->getActivity($_GET["ids"]);
+        
 ?>
 <h2><?= $pagetitle; ?></h2>
 <div class="setutitle"><label class="placetype"><?= $stlm["place"]; ?></label> <?= $stlm["name_en"]; ?> <?= $settlements->osmLink($stlm["lat"], $stlm["lon"]); ?> - 
@@ -86,6 +89,7 @@ $zindex = 30;
     <ul>
     <b>Closest settlements</b><br/>
 <?php
+    $closename = '';
     foreach($closest as $close)
     {
         $closename = $close["name"];
@@ -135,12 +139,10 @@ $zindex = 30;
 <div id="Bing"><a href="#Bing">Bing</a>
       <div id='mapDiv' style="width:600px; height:400px;"></div>    
 </div>
-
 <!-- MAPBOX -->
 <div id="Mapbox"><a href="#Mapbox">Mapbox</a>
-<div><iframe id="mapboxmap" width='600px' height='400px' frameBorder='0' src='https://a.tiles.mapbox.com/v4/<?= MAPBOX_MAP ?>/attribution,zoompan,zoomwheel,geocoder,share.html?access_token=<?= MAPBOX_TOKEN ?><?= "#".$zoom."/".$stlm["lat"]."/".$stlm["lon"]; ?>'></iframe></div>
+<div><iframe id="mapboxmap" width='600px' height='400px' frameBorder='0' src='https://a.tiles.mapbox.com/v4/stalfur.m96g6f9a/attribution,zoompan,zoomwheel,geocoder,share.html?access_token=pk.eyJ1Ijoic3RhbGZ1ciIsImEiOiJYT2xBaFN3In0.v_vvJeC2QQgopWUR7-oPkQ<?= "#".$zoom."/".$stlm["lat"]."/".$stlm["lon"]; ?>'></iframe></div>
 </div>
-
 <!-- Mapillary -->
 <div id="Mapillary"><a href="#Mapillary">Mapillary</a>
 <div id="mapil" style="width: 600px; height: 400px"></div>
@@ -149,9 +151,8 @@ $zindex = 30;
 
  var map = new L.map('mapil').setView([<?= $stlm["lat"].",".$stlm["lon"];?>], <?= $zoom; ?>);
  
-  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '? OpenStreetMap contributors'
-  }).addTo(map);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors, map data is <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a>, map tiles are <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
 
   var config = {
     url: "https://d2munx5tg0hw47.cloudfront.net/tiles/{z}/{x}/{y}.mapbox"
@@ -160,6 +161,83 @@ $zindex = 30;
   var mapillarySource = new L.TileLayer.MVTSource(config);
   map.addLayer(mapillarySource);
   
+  /*
+var map = L.map('mapil').setView([<?= $stlm["lat"].",".$stlm["lon"];?>], <?= $zoom; ?>);
+
+		L.tileLayer('https://d2munx5tg0hw47.cloudfront.net/tiles/{z}/{x}/{y}.mapbox', {
+			maxZoom: 18,
+			attribution: 'Images: <a href="http://www.mapillary.com/">Mapillary</a> - Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>'
+		}).addTo(map);
+var onEachFeature = function(feature, layer) {
+    console.log(arguments);
+    var content = '<div><img src="'+feature.properties.image+'"></img></div>'
+    layer.bindPopup(content);
+};
+var mapillaryLayer = L.geoJson(null, {
+                        onEachFeature: onEachFeature
+                    })
+mapillaryLayer.addTo(map);
+*/
+   
+   /*
+function refreshMapillary() {
+
+// Loading JSON objects using JSONP 
+
+(function($) {
+    var url = 'https://a.mapillary.com/v2/search/im/close';
+    $.ajax({
+       type: 'GET',
+        url: url,
+        data: {                     
+                'client_id': 'dml2ZTVEVjYwRnZsSUFiZkxfZ0R0dzo0ODdkMGY3NjY4OGJiN2Q4',
+                'min_lat': map.getBounds().getSouth(),
+                'max_lat': map.getBounds().getNorth(),
+                'min_lon': map.getBounds().getWest(),
+                'max_lon': map.getBounds().getEast(),
+                'limit': '10',
+                'page': '0'
+            },
+        async: false,
+        contentType: "application/json",
+        dataType: 'jsonp',
+        success: function(data) {
+                $(data.features).each(function(key, data) {
+                    console.log('data',data);
+                    mapillaryLayer.addData(data);
+                });
+            }
+    });
+})(jQuery);
+/*
+    $.ajax({
+    dataType: "jsonp",
+    
+    url: "https://a.mapillary.com/v2/search/im/geojson/",
+            data: {                     
+                'client_id': 'dml2ZTVEVjYwRnZsSUFiZkxfZ0R0dzpmZmY4Y2Y5YmQ3YjhjOWY0',
+                'min-lat': map.getBounds().getSouth(),
+                'max-lat': map.getBounds().getNorth(),
+                'min-lon': map.getBounds().getWest(),
+                'max-lon': map.getBounds().getEast(),
+                'limit': '10',
+                'page': '0'
+            },
+            success: function(data) {
+                $(data.features).each(function(key, data) {
+                    console.log('data',data);
+                    mapillaryLayer.addData(data);
+                });
+            }
+    });
+    */
+//}
+/*
+refreshMapillary();
+map.on('mouseup', refreshMapillary);
+*/
 </script>
 
 <!-- OSM -->
@@ -169,12 +247,26 @@ $zindex = 30;
 <script>
 var map = L.map('map').setView([<?= $stlm["lat"]; ?>, <?= $stlm["lon"]; ?>], <?= $zoom; ?>);
 		
-	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors, map data is <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a>, map tiles are <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     maxZoom: 18
 	}).addTo(map);
 </script>
  </div>
+<!--
+    <br clear="all" />
+    <div class="activity" style="float:right"><b>Latest updates</b><br/>
+        <?php
+        /*
+        foreach($activity as $act)
+        {
+            $returner = $act["the_datetime"]." - ".$act["item_field"]." - ";
+            $returner .= '<a href="user.php?user='.$act["osm_user"].'">'.$act["osm_user"].'</a><br/>';
+            echo $returner;
+        }*/
+        ?>
+    </div>
+-->
 <?php 
 include("includes/javascripts.php");
-include("includes/footer.php");
+include("includes/footer.php");?>
